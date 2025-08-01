@@ -1,0 +1,222 @@
+{
+  "deploymentFee": "10000000000000000",
+  "feeRecipient": "0x0000000000000000000000000000000000000000",
+  "defaultStrategies": [
+    {
+      "strategyId": "0x4152424954524147455f56310000000000000000000000000000000000000000",
+      "isActive": true,
+      "maxTradeAmount": "1000000000000000000000",
+      "riskThreshold": 500,
+      "cooldownPeriod": 300,
+      "lastExecutionTime": 0
+    },
+    {
+      "strategyId": "0x4d41524b45545f4d414b494e475f563100000000000000000000000000000000",
+      "isActive": true,
+      "maxTradeAmount": "500000000000000000000",
+      "riskThreshold": 300,
+      "cooldownPeriod": 600,
+      "lastExecutionTime": 0
+    }
+  ],
+  "defaultRiskParameters": {
+    "maxLeverage": 300,
+    "stopLossThreshold": 1000,
+    "maxDrawdown": 2000,
+    "volatilityThreshold": 5000
+  },
+  "networks": {
+    "localhost": {
+      "chainId": 31337,
+      "name": "Hardhat Local",
+      "rpcUrl": "http://127.0.0.1:8545",
+      "blockExplorer": "",
+      "gasPrice": "20000000000",
+      "gasLimit": "6000000"
+    },
+    "goerli": {
+      "chainId": 5,
+      "name": "Goerli Testnet",
+      "rpcUrl": "https://goerli.infura.io/v3/YOUR_INFURA_KEY",
+      "blockExplorer": "https://goerli.etherscan.io",
+      "gasPrice": "20000000000",
+      "gasLimit": "6000000"
+    },
+    "sepolia": {
+      "chainId": 11155111,
+      "name": "Sepolia Testnet",
+      "rpcUrl": "https://sepolia.infura.io/v3/YOUR_INFURA_KEY",
+      "blockExplorer": "https://sepolia.etherscan.io",
+      "gasPrice": "20000000000",
+      "gasLimit": "6000000"
+    },
+    "mainnet": {
+      "chainId": 1,
+      "name": "Ethereum Mainnet",
+      "rpcUrl": "https://mainnet.infura.io/v3/YOUR_INFURA_KEY",
+      "blockExplorer": "https://etherscan.io",
+      "gasPrice": "30000000000",
+      "gasLimit": "6000000"
+    },
+    "arbitrum": {
+      "chainId": 42161,
+      "name": "Arbitrum One",
+      "rpcUrl": "https://arb1.arbitrum.io/rpc",
+      "blockExplorer": "https://arbiscan.io",
+      "gasPrice": "1000000000",
+      "gasLimit": "6000000"
+    },
+    "polygon": {
+      "chainId": 137,
+      "name": "Polygon Mainnet",
+      "rpcUrl": "https://polygon-rpc.com",
+      "blockExplorer": "https://polygonscan.com",
+      "gasPrice": "30000000000",
+      "gasLimit": "6000000"
+    }
+  },
+  "strategyTemplates": {
+    "arbitrage": {
+      "name": "Arbitrage Strategy",
+      "description": "Exploits price differences across different exchanges",
+      "defaultConfig": {
+        "minProfitThreshold": 50,
+        "maxSlippage": 100,
+        "supportedDEXs": ["uniswap", "sushiswap", "curve"]
+      },
+      "riskLevel": 2,
+      "estimatedAPY": "15-25%"
+    },
+    "marketMaking": {
+      "name": "Market Making Strategy",
+      "description": "Provides liquidity and captures bid-ask spreads",
+      "defaultConfig": {
+        "spread": 20,
+        "inventoryTarget": 50,
+        "rebalanceThreshold": 10
+      },
+      "riskLevel": 1,
+      "estimatedAPY": "8-15%"
+    },
+    "liquidation": {
+      "name": "Liquidation Strategy",
+      "description": "Liquidates undercollateralized positions for profit",
+      "defaultConfig": {
+        "healthFactorThreshold": 110,
+        "liquidationBonus": 500,
+        "supportedProtocols": ["aave", "compound", "huma"]
+      },
+      "riskLevel": 3,
+      "estimatedAPY": "20-40%"
+    },
+    "yieldFarming": {
+      "name": "Yield Farming Strategy",
+      "description": "Optimizes yield across different DeFi protocols",
+      "defaultConfig": {
+        "minAPY": 500,
+        "maxProtocolRisk": 3,
+        "rebalanceFrequency": 86400
+      },
+      "riskLevel": 2,
+      "estimatedAPY": "10-30%"
+    }
+  },
+  "riskManagement": {
+    "maxLeverageByRiskLevel": {
+      "1": 200,
+      "2": 300,
+      "3": 500,
+      "4": 1000
+    },
+    "stopLossThresholds": {
+      "conservative": 500,
+      "moderate": 1000,
+      "aggressive": 2000
+    },
+    "maxDrawdownLimits": {
+      "conservative": 1000,
+      "moderate": 2000,
+      "aggressive": 3000
+    },
+    "volatilityThresholds": {
+      "low": 2000,
+      "medium": 5000,
+      "high": 10000
+    }
+  },
+  "monitoring": {
+    "healthCheckInterval": 300,
+    "performanceUpdateInterval": 3600,
+    "alertThresholds": {
+      "consecutiveFailures": 5,
+      "drawdownAlert": 1500,
+      "profitabilityAlert": -1000
+    },
+    "notificationChannels": {
+      "email": true,
+      "slack": false,
+      "discord": false,
+      "telegram": false
+    }
+  },
+  "security": {
+    "maxStrategiesPerAgent": 50,
+    "maxTradeAmountPerStrategy": "10000000000000000000000",
+    "emergencyStopEnabled": true,
+    "multiSigRequired": false,
+    "timelock": {
+      "enabled": false,
+      "delay": 86400
+    }
+  },
+  "integration": {
+    "oracles": {
+      "chainlink": {
+        "enabled": true,
+        "feeds": {
+          "ETH/USD": "0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419",
+          "BTC/USD": "0xF4030086522a5bEEa4988F8cA5B36dbC97BeE88c"
+        }
+      },
+      "uniswap": {
+        "enabled": true,
+        "version": "v3",
+        "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+      }
+    },
+    "dexes": {
+      "uniswap": {
+        "enabled": true,
+        "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+        "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+      },
+      "sushiswap": {
+        "enabled": true,
+        "router": "0xd9e1cE17f2641f24aE83637ab66a2cca9C378B9F"
+      }
+    },
+    "lending": {
+      "aave": {
+        "enabled": true,
+        "lendingPool": "0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9"
+      },
+      "compound": {
+        "enabled": true,
+        "comptroller": "0x3d9819210A31b4961b30EF54bE2aeD79B9c9Cd3B"
+      }
+    }
+  },
+  "ui": {
+    "theme": "dark",
+    "defaultChartPeriod": "24h",
+    "refreshInterval": 30000,
+    "showAdvancedMetrics": false,
+    "enableNotifications": true
+  },
+  "development": {
+    "enableDebugLogs": true,
+    "mockExternalCalls": false,
+    "testnetOnly": true,
+    "skipVerification": false
+  }
+}

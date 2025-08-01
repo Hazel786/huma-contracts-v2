@@ -26,7 +26,12 @@
     "prepare": "husky install",
     "test": "hardhat test --network hardhat --typecheck",
     "verify": "hardhat verify",
-    "gen-error-ids": "hardhat run scripts/gen-error-function-ids.ts --network hardhat && prettier --write scripts/error-functions.json"
+    "gen-error-ids": "hardhat run scripts/gen-error-function-ids.ts --network hardhat && prettier --write scripts/error-functions.json",
+    "sol:deploy": "hardhat run scripts/deploy-sol-strategy.ts --network localhost",
+    "sol:run": "AUTO_EXECUTE=true hardhat run scripts/run-sol-agent.ts --network localhost",
+    "sol:monitor": "AUTO_EXECUTE=false hardhat run scripts/run-sol-agent.ts --network localhost",
+    "sol:simulate": "hardhat run scripts/run-sol-agent.ts --network localhost -- --simulate-drop",
+    "sol:test": "npm run sol:simulate && npm run sol:run"
   },
   "lint-staged": {
     "*.{js,json,ts,yaml,yml}": [
